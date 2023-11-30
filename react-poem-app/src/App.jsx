@@ -11,38 +11,25 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Details from "./components/Details/Details";
 import OrderComplete from "./components/OrderComplete/OrderComplete";
-import { useState } from "react";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
-  const [auth, setAuth] = useState({});
-
-  const loginSubmitHandler = (values) => {
-    console.log(values);
-  };
-
-  const registerSubmitHandler = (values) => {
-    console.log(values);
-  };
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/catalogue" element={<Catalogue />} />
-        <Route path="/catalogue/:articleId" element={<Details />} />
-        <Route path="/order" element={<Order />} />
-        <Route path="/complete" element={<OrderComplete />} />
-        <Route path="/liked-articles" element={<Liked />} />
-        <Route
-          path="/login"
-          element={<Login loginSubmitHandler={loginSubmitHandler} />}
-        />
-        <Route
-          path="/register"
-          element={<Register registerSubmitHandler={registerSubmitHandler} />}
-        />
-      </Routes>
-      <Footer />
+      <AuthProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/catalogue/:articleId" element={<Details />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/complete" element={<OrderComplete />} />
+          <Route path="/liked-articles" element={<Liked />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+        <Footer />
+      </AuthProvider>
     </>
   );
 }

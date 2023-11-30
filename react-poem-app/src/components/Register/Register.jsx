@@ -1,16 +1,20 @@
+import { useAuth } from "../../context/AuthContext";
 import useForm from "../../hooks/useForm";
 
-export default function Register({ registerSubmitHandler }) {
+export default function Register() {
   const REGISTER_FORM_KEYS = {
     Email: "email",
     Password: "password",
     RepeatPassword: "repeatPassword",
   };
+  const { registerSubmitHandler } = useAuth();
+
   const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
     [REGISTER_FORM_KEYS.Email]: "",
     [REGISTER_FORM_KEYS.Password]: "",
     [REGISTER_FORM_KEYS.RepeatPassword]: "",
   });
+
   return (
     <div className="register_page">
       <div className="register_wrapper">
@@ -24,6 +28,7 @@ export default function Register({ registerSubmitHandler }) {
             name={REGISTER_FORM_KEYS.Email}
             value={values.email}
             onChange={onChange}
+            required
           />
 
           <div className="error_register">Email is required!</div>
@@ -36,6 +41,7 @@ export default function Register({ registerSubmitHandler }) {
             name={REGISTER_FORM_KEYS.Password}
             value={values.password}
             onChange={onChange}
+            required
           />
 
           <div className="error_register">Password is required!</div>
@@ -48,6 +54,7 @@ export default function Register({ registerSubmitHandler }) {
             name={REGISTER_FORM_KEYS.RepeatPassword}
             value={values.repeatPassword}
             onChange={onChange}
+            required
           />
           <div className="error_register"></div>
           <div className="error_register">Passwords missmatch!</div>
