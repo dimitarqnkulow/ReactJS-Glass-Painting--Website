@@ -11,8 +11,18 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Details from "./components/Details/Details";
 import OrderComplete from "./components/OrderComplete/OrderComplete";
+import { useState } from "react";
 
 function App() {
+  const [auth, setAuth] = useState({});
+
+  const loginSubmitHandler = (values) => {
+    console.log(values);
+  };
+
+  const registerSubmitHandler = (values) => {
+    console.log(values);
+  };
   return (
     <>
       <Header />
@@ -23,8 +33,14 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="/complete" element={<OrderComplete />} />
         <Route path="/liked-articles" element={<Liked />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/login"
+          element={<Login loginSubmitHandler={loginSubmitHandler} />}
+        />
+        <Route
+          path="/register"
+          element={<Register registerSubmitHandler={registerSubmitHandler} />}
+        />
       </Routes>
       <Footer />
     </>

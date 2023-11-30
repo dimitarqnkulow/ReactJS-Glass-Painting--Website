@@ -1,15 +1,29 @@
-export default function Register() {
+import useForm from "../../hooks/useForm";
+
+export default function Register({ registerSubmitHandler }) {
+  const REGISTER_FORM_KEYS = {
+    Email: "email",
+    Password: "password",
+    RepeatPassword: "repeatPassword",
+  };
+  const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
+    [REGISTER_FORM_KEYS.Email]: "",
+    [REGISTER_FORM_KEYS.Password]: "",
+    [REGISTER_FORM_KEYS.RepeatPassword]: "",
+  });
   return (
     <div className="register_page">
       <div className="register_wrapper">
         <div className="heading">Register</div>
         <div className="error_register">{}</div>
-        <form className="ng_form">
+        <form className="ng_form" onSubmit={onSubmit}>
           <input
             className="input_field"
             type="email"
             placeholder="Email address"
-            name="email"
+            name={REGISTER_FORM_KEYS.Email}
+            value={values.email}
+            onChange={onChange}
           />
 
           <div className="error_register">Email is required!</div>
@@ -19,7 +33,9 @@ export default function Register() {
             className="input_field"
             type="password"
             placeholder="Password"
-            name="password"
+            name={REGISTER_FORM_KEYS.Password}
+            value={values.password}
+            onChange={onChange}
           />
 
           <div className="error_register">Password is required!</div>
@@ -29,7 +45,9 @@ export default function Register() {
             className="input_field"
             type="password"
             placeholder="Repeat Password"
-            name="repeatPassword"
+            name={REGISTER_FORM_KEYS.RepeatPassword}
+            value={values.repeatPassword}
+            onChange={onChange}
           />
           <div className="error_register"></div>
           <div className="error_register">Passwords missmatch!</div>
