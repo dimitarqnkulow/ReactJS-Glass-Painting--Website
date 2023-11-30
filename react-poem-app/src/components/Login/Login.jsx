@@ -1,4 +1,10 @@
+import useForm from "../../hooks/useForm";
+
 export default function Login() {
+  const { values, onChange, onSubmit } = useForm({
+    email: "",
+    password: "",
+  });
   return (
     <div className="register_page">
       <div className="register_wrapper">
@@ -6,12 +12,14 @@ export default function Login() {
 
         <div className="error_register">{}</div>
 
-        <form className="ng_form">
+        <form className="ng_form" onSubmit={onSubmit}>
           <input
             className="input_field"
             type="email"
             placeholder="Email address"
             name="email"
+            onChange={onChange}
+            value={values.email}
           />
 
           <div className="error_register">Email is required!</div>
@@ -22,6 +30,8 @@ export default function Login() {
             type="password"
             placeholder="Password"
             name="password"
+            onChange={onChange}
+            value={values.password}
           />
 
           <div className="error_register">Password is required!</div>

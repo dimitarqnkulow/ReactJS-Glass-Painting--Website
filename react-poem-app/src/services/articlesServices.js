@@ -4,12 +4,11 @@ import { collection, getDocs } from "firebase/firestore";
 
 const articlesCollectionRef = collection(db, "articles");
 const createUser = async () => {
-  await addDoc(usersCollectionRef, {});
+  await addDoc(articlesCollectionRef, {});
 };
 useEffect(() => {
   const getArticles = async () => {
-    const data = await getDocs(usersCollectionRef);
-    setArticles(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    const data = await getDocs(articlesCollectionRef);
   };
   getArticles();
 }, []);
