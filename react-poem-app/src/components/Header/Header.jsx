@@ -31,7 +31,9 @@ export default function Header() {
         </div>
 
         <div className="user_buttons_wrapper">
-          <button className="logout user_guide_button">Logout</button>
+          <Link className="logout user_guide_button" to="/logout">
+            Logout
+          </Link>
 
           <Link className="user_guide_button" to="/login">
             Login
