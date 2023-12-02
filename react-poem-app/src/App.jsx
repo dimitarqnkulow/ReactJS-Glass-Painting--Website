@@ -12,6 +12,8 @@ import Register from "./components/Register/Register";
 import Details from "./components/Details/Details";
 import OrderComplete from "./components/OrderComplete/OrderComplete";
 import { AuthProvider } from "./context/AuthContext";
+import Path from "./lib/paths";
+import Logout from "./components/Logout/Logout";
 
 function App() {
   return (
@@ -19,14 +21,15 @@ function App() {
       <AuthProvider>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path={Path.Home} element={<Home />} />
           <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/catalogue/:articleId" element={<Details />} />
           <Route path="/order" element={<Order />} />
           <Route path="/complete" element={<OrderComplete />} />
           <Route path="/liked-articles" element={<Liked />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path={Path.Login} element={<Login />} />
+          <Route path={Path.Register} element={<Register />} />
+          <Route path={Path.Logout} element={<Logout />} />
         </Routes>
         <Footer />
       </AuthProvider>
