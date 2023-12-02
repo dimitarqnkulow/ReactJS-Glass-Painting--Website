@@ -1,4 +1,12 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+
+import { onAuthStateChanged } from "firebase/auth";
+
+import { auth } from "../config/firebase-config";
+import Path from "../lib/paths";
+import { login, logout, register } from "../services/authServices";
 
 const AuthContext = createContext();
 export function useAuth() {
@@ -6,18 +14,49 @@ export function useAuth() {
 }
 export function AuthProvider({ children }) {
   const [user, setUser] = useState();
+  const [err, setErr] = useState();
 
-  const registerSubmitHandler = (values) => {
-    console.log(values);
+  const navigate = useNavigate();
+
+  const registerSubmitHandler = async ({ email, password, repeatPassword }) => {
+    try {
+      await register(email, password, repeatPassword);
+      navigate(Path.Home);
+    } catch (err) {
+      setErr(err);
+      navigate(Path.Register);
+    }
   };
 
-  const loginSubmitHandler = (values) => {
-    console.log(values);
+  const loginSubmitHandler = async ({ email, password }) => {
+    try {
+      await login(email, password);
+      navigate(Path.Home);
+    } catch (err) {
+      console.log(err);
+      navigate(Path.Login);
+    }
   };
+  const logoutHandler = async () => {
+    try {
+      await logout();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
+    console.log(user);
+    return unsubscribe;
+  }, []);
 
   const values = {
+    err,
+    user,
     loginSubmitHandler,
     registerSubmitHandler,
+    logoutHandler,
   };
+
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 }
