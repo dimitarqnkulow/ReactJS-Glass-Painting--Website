@@ -7,7 +7,7 @@ export default function Login() {
     Password: "password",
   };
   const { loginSubmitHandler, err } = useAuth();
-
+  console.log(err);
   const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
     email: "",
     password: "",
@@ -17,7 +17,7 @@ export default function Login() {
       <div className="register_wrapper">
         <div className="heading">Login</div>
 
-        <div className="error_register">{}</div>
+        {err && <div className="error_register">Error!</div>}
 
         <form className="ng_form" onSubmit={onSubmit}>
           <input
@@ -29,8 +29,8 @@ export default function Login() {
             value={values.email}
           />
 
-          <div className="error_register">Email is required!</div>
-          <div className="error_register">Email is invalid!</div>
+          {/* <div className="error_register">Email is required!</div>
+      <div className="error_register">Email is invalid!</div> */}
 
           <input
             className="input_field"
@@ -41,7 +41,7 @@ export default function Login() {
             value={values.password}
           />
 
-          <div className="error_register">Password is required!</div>
+          {/* <div className="error_register">Password is required!</div> */}
 
           <button className="sign_in_button" type="submit">
             Log in

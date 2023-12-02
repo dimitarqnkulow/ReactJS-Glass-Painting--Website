@@ -1,25 +1,24 @@
 import { useAuth } from "../../context/AuthContext";
 import useForm from "../../hooks/useForm";
 
+const REGISTER_FORM_KEYS = {
+  Email: "email",
+  Password: "password",
+  RepeatPassword: "repeatPassword",
+};
 export default function Register() {
-  const REGISTER_FORM_KEYS = {
-    Email: "email",
-    Password: "password",
-    RepeatPassword: "repeatPassword",
-  };
-  const { registerSubmitHandler } = useAuth();
-
+  const { registerSubmitHandler, err } = useAuth();
+  console.log(err);
   const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
     [REGISTER_FORM_KEYS.Email]: "",
     [REGISTER_FORM_KEYS.Password]: "",
     [REGISTER_FORM_KEYS.RepeatPassword]: "",
   });
-
   return (
     <div className="register_page">
       <div className="register_wrapper">
         <div className="heading">Register</div>
-        <div className="error_register">{}</div>
+        {err && <div className="error_register">Error!</div>}
         <form className="ng_form" onSubmit={onSubmit}>
           <input
             className="input_field"
@@ -31,8 +30,8 @@ export default function Register() {
             required
           />
 
-          <div className="error_register">Email is required!</div>
-          <div className="error_register">Email is invalid!</div>
+          {/* <div className="error_register">Email is required!</div>
+          <div className="error_register">Email is invalid!</div> */}
 
           <input
             className="input_field"
@@ -43,9 +42,9 @@ export default function Register() {
             onChange={onChange}
             required
           />
-
+          {/* 
           <div className="error_register">Password is required!</div>
-          <div className="error_register">Password must be 5 characters!</div>
+          <div className="error_register">Password must be 5 characters!</div> */}
 
           <input
             className="input_field"
@@ -57,7 +56,7 @@ export default function Register() {
             required
           />
           <div className="error_register"></div>
-          <div className="error_register">Passwords missmatch!</div>
+          {/* <div className="error_register">Passwords missmatch!</div> */}
 
           <button className="sign_in_button" type="submit">
             Register
