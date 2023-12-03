@@ -1,5 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 import useForm from "../../hooks/useForm";
+import Path from "../../utils/paths";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const LOGIN_FORM_KEYS = {
@@ -49,7 +51,9 @@ export default function Login() {
 
           <div className="log_in_link">
             If you don't have an account?
-            <a className="sign_in">Sign Up</a>
+            <Link className="sign_in" to={Path.Register}>
+              Sign Up
+            </Link>
           </div>
         </form>
       </div>

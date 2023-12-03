@@ -23,12 +23,12 @@ function App() {
         <Header />
         <Routes>
           <Route path={Path.Home} element={<Home />} />
-          <Route path="/catalogue" element={<Catalogue />} />
-          <Route path="/catalogue/:articleId" element={<Details />} />
+          <Route path={Path.Catalogue} element={<Catalogue />} />
+          <Route path={Path.Details} element={<Details />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/order" element={<Order />} />
-            <Route path="/complete" element={<OrderComplete />} />
-            <Route path="/liked-articles" element={<Liked />} />
+            <Route path={Path.Order} element={<Order />} />
+            <Route path={Path.Complete} element={<OrderComplete />} />
+            <Route path={Path.Liked} element={<Liked />} />
           </Route>
           <Route path={Path.Login} element={<Login />} />
           <Route path={Path.Register} element={<Register />} />

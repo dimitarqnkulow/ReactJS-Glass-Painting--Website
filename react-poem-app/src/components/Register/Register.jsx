@@ -1,14 +1,16 @@
 import { useAuth } from "../../context/AuthContext";
 import useForm from "../../hooks/useForm";
+import { Link } from "react-router-dom";
+import Path from "../../utils/paths";
 
 const REGISTER_FORM_KEYS = {
   Email: "email",
   Password: "password",
   RepeatPassword: "repeatPassword",
 };
+
 export default function Register() {
   const { registerSubmitHandler, err } = useAuth();
-  console.log(err);
   const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
     [REGISTER_FORM_KEYS.Email]: "",
     [REGISTER_FORM_KEYS.Password]: "",
@@ -64,7 +66,9 @@ export default function Register() {
 
           <div className="log_in_link">
             If you already have an account?
-            <a className="sign_in">Sign in</a>
+            <Link className="sign_in" to={Path.Login}>
+              Sign in
+            </Link>
           </div>
         </form>
       </div>
