@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
-import Path from "../../lib/paths";
+import Path from "../../utils/paths";
 import { useNavigate } from "react-router-dom";
 
 export default function Logout() {

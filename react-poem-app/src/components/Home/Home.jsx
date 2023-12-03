@@ -65,7 +65,7 @@ export default function Home() {
         <div className="trending_products_header">Trending products</div>
         <div className="trendings_products_list">
           <div className="product_card">
-            <img className="product_card_image" src="{{ article.img }}" />
+            <img className="product_card_image" src="" />
             <div className="product_card_name">Article Name</div>
             <div className="product_card_price">
               $13
@@ -74,7 +74,7 @@ export default function Home() {
             <button className="product_card_button">Details</button>
           </div>
           <div className="product_card">
-            <img className="product_card_image" src="{{ article.img }}" />
+            <img className="product_card_image" src="" />
             <div className="product_card_name">Article Name</div>
             <div className="product_card_price">
               $13
@@ -83,7 +83,7 @@ export default function Home() {
             <button className="product_card_button">Details</button>
           </div>
           <div className="product_card">
-            <img className="product_card_image" src="{{ article.img }}" />
+            <img className="product_card_image" src="" />
             <div className="product_card_name">Article Name</div>
             <div className="product_card_price">
               $13

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 
 import { auth } from "../config/firebase-config";
-import Path from "../lib/paths";
+import Path from "../utils/paths";
 import { login, logout, register } from "../services/authServices";
 
 const AuthContext = createContext();
@@ -13,8 +13,8 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState();
-  const [err, setErr] = useState();
+  const [user, setUser] = useState({});
+  const [err, setErr] = useState("");
 
   const navigate = useNavigate();
 
@@ -46,7 +46,6 @@ export function AuthProvider({ children }) {
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => setUser(user));
-    console.log(user);
     return unsubscribe;
   }, []);
 
@@ -56,6 +55,7 @@ export function AuthProvider({ children }) {
     loginSubmitHandler,
     registerSubmitHandler,
     logoutHandler,
+    isAuthenticated: !!user?.accessToken,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

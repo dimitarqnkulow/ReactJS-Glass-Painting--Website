@@ -12,8 +12,9 @@ import Register from "./components/Register/Register";
 import Details from "./components/Details/Details";
 import OrderComplete from "./components/OrderComplete/OrderComplete";
 import { AuthProvider } from "./context/AuthContext";
-import Path from "./lib/paths";
+import Path from "./utils/paths";
 import Logout from "./components/Logout/Logout";
+import PrivateRoute from "./utils/PrivateRoutes";
 
 function App() {
   return (
@@ -24,9 +25,11 @@ function App() {
           <Route path={Path.Home} element={<Home />} />
           <Route path="/catalogue" element={<Catalogue />} />
           <Route path="/catalogue/:articleId" element={<Details />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/complete" element={<OrderComplete />} />
-          <Route path="/liked-articles" element={<Liked />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/order" element={<Order />} />
+            <Route path="/complete" element={<OrderComplete />} />
+            <Route path="/liked-articles" element={<Liked />} />
+          </Route>
           <Route path={Path.Login} element={<Login />} />
           <Route path={Path.Register} element={<Register />} />
           <Route path={Path.Logout} element={<Logout />} />

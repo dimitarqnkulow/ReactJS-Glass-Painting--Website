@@ -7,7 +7,7 @@ export default function Login() {
     Password: "password",
   };
   const { loginSubmitHandler, err } = useAuth();
-  console.log(err);
+
   const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
     email: "",
     password: "",
