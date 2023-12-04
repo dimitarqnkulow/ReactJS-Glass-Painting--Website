@@ -4,7 +4,7 @@ export default function Article({ id, articleName, price, imgUrl }) {
   return (
     <div className="product_wrapper">
       <div className="product_item">
-        <img src={imgUrl} className="product_image" />
+        <img src={imgUrl} className="product_image_catalogue" />
 
         <p className="item_name">{articleName}</p>
 
