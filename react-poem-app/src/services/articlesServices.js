@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
-import { db } from "./firebase-config";
+import { db } from "../config/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
 const articlesCollectionRef = collection(db, "articles");
-const createUser = async () => {
-  await addDoc(articlesCollectionRef, {});
+
+export const getAllArticles = async () => {
+  const data = await getDocs(articlesCollectionRef);
+
+  return data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 };
-useEffect(() => {
-  const getArticles = async () => {
-    const data = await getDocs(articlesCollectionRef);
-  };
-  getArticles();
-}, []);

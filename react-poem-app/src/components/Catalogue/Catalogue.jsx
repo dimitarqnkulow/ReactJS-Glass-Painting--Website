@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react";
+import * as articleServices from "../../services/articlesServices";
+import Article from "./Article/Article";
+
 export default function Catalogue() {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    articleServices.getAllArticles().then((result) => setArticles(result));
+  }, []);
+
   return (
-    <>
+    <div className="catalogue_box">
       <div className="search_wrapper">
         <h1 className="catalogue_header">Ecommerce Acceories & Fashion item</h1>
         <div className="search_bar_wrapper">
@@ -13,133 +23,10 @@ export default function Catalogue() {
       </div>
 
       <div className="articles_wrapper">
-        <div className="product_wrapper">
-          <div className="loading_wrapper"></div>
-          <div className="product_item">
-            <img src="" alt="" className="product_image" />
-
-            <p className="item_name">{}</p>
-
-            <p className="product_price">
-              $12
-              <span className="product_card_discount_price">$12</span>
-            </p>
-            <button className="product_card_button">Details</button>
-          </div>
-        </div>
-        <div className="product_wrapper">
-          <div className="loading_wrapper"></div>
-          <div className="product_item">
-            <img src="" alt="" className="product_image" />
-
-            <p className="item_name">{}</p>
-
-            <p className="product_price">
-              $12
-              <span className="product_card_discount_price">$12</span>
-            </p>
-            <button className="product_card_button">Details</button>
-          </div>
-        </div>
-        <div className="product_wrapper">
-          <div className="loading_wrapper"></div>
-          <div className="product_item">
-            <img src="" alt="" className="product_image" />
-
-            <p className="item_name">{}</p>
-
-            <p className="product_price">
-              $12
-              <span className="product_card_discount_price">$12</span>
-            </p>
-            <button className="product_card_button">Details</button>
-          </div>
-        </div>
-        <div className="product_wrapper">
-          <div className="loading_wrapper"></div>
-          <div className="product_item">
-            <img src="" alt="" className="product_image" />
-
-            <p className="item_name">{}</p>
-
-            <p className="product_price">
-              $12
-              <span className="product_card_discount_price">$12</span>
-            </p>
-            <button className="product_card_button">Details</button>
-          </div>
-        </div>
-        <div className="product_wrapper">
-          <div className="loading_wrapper"></div>
-          <div className="product_item">
-            <img src="" alt="" className="product_image" />
-
-            <p className="item_name">{}</p>
-
-            <p className="product_price">
-              $12
-              <span className="product_card_discount_price">$12</span>
-            </p>
-            <button className="product_card_button">Details</button>
-          </div>
-        </div>
-        <div className="product_wrapper">
-          <div className="loading_wrapper"></div>
-          <div className="product_item">
-            <img src="" alt="" className="product_image" />
-
-            <p className="item_name">{}</p>
-
-            <p className="product_price">
-              $12
-              <span className="product_card_discount_price">$12</span>
-            </p>
-            <button className="product_card_button">Details</button>
-          </div>
-        </div>
-        <div className="product_wrapper">
-          <div className="loading_wrapper"></div>
-          <div className="product_item">
-            <img src="" alt="" className="product_image" />
-
-            <p className="item_name">{}</p>
-
-            <p className="product_price">
-              $12
-              <span className="product_card_discount_price">$12</span>
-            </p>
-            <button className="product_card_button">Details</button>
-          </div>
-        </div>
-        <div className="product_wrapper">
-          <div className="loading_wrapper"></div>
-          <div className="product_item">
-            <img src="" alt="" className="product_image" />
-
-            <p className="item_name">{}</p>
-
-            <p className="product_price">
-              $12
-              <span className="product_card_discount_price">$12</span>
-            </p>
-            <button className="product_card_button">Details</button>
-          </div>
-        </div>
-        <div className="product_wrapper">
-          <div className="loading_wrapper"></div>
-          <div className="product_item">
-            <img src="" alt="" className="product_image" />
-
-            <p className="item_name">{}</p>
-
-            <p className="product_price">
-              $12
-              <span className="product_card_discount_price">$12</span>
-            </p>
-            <button className="product_card_button">Details</button>
-          </div>
-        </div>
+        {articles.map((article) => (
+          <Article key={article.id} {...article} />
+        ))}
       </div>
-    </>
+    </div>
   );
 }
