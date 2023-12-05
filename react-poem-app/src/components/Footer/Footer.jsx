@@ -26,14 +26,14 @@ export default function Footer() {
             href="https://www.facebook.com/groups/2780589892240723/"
             target="_blank"
           >
-            <img className="social_icon" src="assets/facebook.svg" />
+            <img className="social_icon" src="/assets/facebook.svg" />
           </a>
           <a href="https://www.instagram.com/stuklorisuvane/" target="_blank">
-            <img className="social_icon" src="assets/instagram.svg" />
+            <img className="social_icon" src="/assets/instagram.svg" />
           </a>
 
           <a href="https://youtube.com" target="_blank">
-            <img className="social_icon" src="assets/youtube.svg" />
+            <img className="social_icon" src="/assets/youtube.svg" />
           </a>
         </div>
       </div>

@@ -32,9 +32,9 @@ export default function Details() {
             <h2 className="product_name">{article.articleName}</h2>
 
             <div className="likes_counter">
-              <img id="likes_icon" src="assets/likes_count.png" />
+              <img id="likes_icon" src="/assets/likes_count.png" />
 
-              <p className="likes_count">{}</p>
+              <p className="likes_count">{article.likes}</p>
             </div>
             <p className="product_material">Optional price</p>
             <div className="product_card_price">
