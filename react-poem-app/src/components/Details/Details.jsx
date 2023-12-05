@@ -1,18 +1,38 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { useAuth } from "../../context/AuthContext";
 import * as articleServices from "../../services/articlesServices";
 
 export default function Details() {
   const { articleId } = useParams();
+  const { user } = useAuth();
+  const { email } = user;
   const [article, setArticle] = useState([]);
-  console.log(articleId);
+  const [likes, setLikes] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
+
   useEffect(() => {
-    articleServices
-      .getOneArticle(articleId)
-      .then((result) => setArticle(result));
+    articleServices.getOneArticle(articleId).then((result) => {
+      setArticle(result);
+
+      setLikes(result.likes);
+
+      if (result.likes.includes(email)) {
+        setIsLiked(true);
+      }
+    });
   }, []);
-  console.log(article);
+
+  const like = async () => {
+    setLikes((state) => [...state, email]);
+    setIsLiked(true);
+    await articleServices.likeArticle(articleId, email);
+  };
+  const dislike = async () => {
+    setLikes((state) => state.filter((like) => like !== email));
+    setIsLiked(false);
+    await articleServices.dislikeArticle(articleId, email);
+  };
   return (
     <div>
       <div className="details_page_header">
@@ -34,7 +54,7 @@ export default function Details() {
             <div className="likes_counter">
               <img id="likes_icon" src="/assets/likes_count.png" />
 
-              <p className="likes_count">{article.likes}</p>
+              <p className="likes_count">{likes.length}</p>
             </div>
             <p className="product_material">Optional price</p>
             <div className="product_card_price">
@@ -63,9 +83,8 @@ export default function Details() {
             </div>
 
             <div className="buttons_wrapper">
-              <div className="like_icon"></div>
-
-              <div className="unlike_icon"></div>
+              {isLiked && <div className="like_icon" onClick={dislike}></div>}
+              {!isLiked && <div className="unlike_icon" onClick={like}></div>}
             </div>
           </div>
         </div>
