@@ -1,4 +1,25 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import * as articleServices from "../../services/articlesServices";
+
 export default function Home() {
+  const [trendingArticles, setTrendingArticles] = useState([]);
+  useEffect(() => {
+    articleServices.getAllArticles().then((result) =>
+      setTrendingArticles(
+        result
+          .sort((a, b) => {
+            if (a.likes.length > b.likes.length) {
+              return -1;
+            } else {
+              return 1;
+            }
+          })
+          .slice(0, 3)
+      )
+    );
+  }, []);
+
   return (
     <div className="home_wrapper">
       <div className="about_us_wrapper">
@@ -64,33 +85,29 @@ export default function Home() {
       <div className="trending_products_wrapper">
         <div className="trending_products_header">Trending products</div>
         <div className="trendings_products_list">
-          <div className="product_card">
-            <img className="product_card_image_home" src="" />
-            <div className="product_card_name">Article Name</div>
-            <div className="product_card_price">
-              $13
-              <span className="product_card_discount_price">$12</span>
+          {trendingArticles.map((trendingArticle) => (
+            <div className="product_card" key={trendingArticle.id}>
+              <img
+                className="product_card_image_home"
+                src={trendingArticle.imgUrl}
+              />
+              <div className="product_card_name">
+                {trendingArticle.articleName}
+              </div>
+              <div className="product_card_price">
+                ${trendingArticle.price}
+                <span className="product_card_discount_price">
+                  ${trendingArticle.price * 1.25}
+                </span>
+              </div>
+              <Link
+                className="product_card_button"
+                to={`/catalogue/${trendingArticle.id}`}
+              >
+                Details
+              </Link>
             </div>
-            <button className="product_card_button">Details</button>
-          </div>
-          <div className="product_card">
-            <img className="product_card_image_home" src="" />
-            <div className="product_card_name">Article Name</div>
-            <div className="product_card_price">
-              $13
-              <span className="product_card_discount_price">$12</span>
-            </div>
-            <button className="product_card_button">Details</button>
-          </div>
-          <div className="product_card">
-            <img className="product_card_image_home" src="" />
-            <div className="product_card_name">Article Name</div>
-            <div className="product_card_price">
-              $13
-              <span className="product_card_discount_price">$12</span>
-            </div>
-            <button className="product_card_button">Details</button>
-          </div>
+          ))}
         </div>
       </div>
     </div>

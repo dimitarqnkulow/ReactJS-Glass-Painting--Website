@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import * as articleServices from "../../services/articlesServices";
-import LikedArticle from "./LikedArticle/LikedArticle";
 
 export default function Liked() {
   const [likedArticles, setLikedArticles] = useState([]);
