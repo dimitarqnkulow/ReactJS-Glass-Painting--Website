@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import * as articleServices from "../../services/articlesServices";
+import LikedArticle from "./LikedArticle/LikedArticle";
 
 export default function Liked() {
   const [likedArticles, setLikedArticles] = useState([]);
@@ -12,7 +13,14 @@ export default function Liked() {
       .getLikedArticles(email)
       .then((result) => setLikedArticles(result));
   }, []);
-  console.log(likedArticles);
+
+  const dislike = async (articleId, userEmail) => {
+    setLikedArticles((state) =>
+      state.filter((likedArticle) => likedArticle.id !== articleId)
+    );
+    await articleServices.dislikeArticle(articleId, userEmail);
+  };
+
   return (
     <>
       <div className="details_page_header">
@@ -31,39 +39,45 @@ export default function Liked() {
             <div className="list_header_item second_item">Optional Price</div>
           </div>
           <div className="items_wrapper">
-            <div className="item">
-              <div className="item_wrapper">
-                <div className="item_image_wrapper">
-                  <img
-                    src="{{ article.img }}"
-                    alt=""
-                    className="product_image"
-                  />
+            {likedArticles.map((likedArticle) => (
+              <div className="item" key={likedArticle.id}>
+                <div className="item_wrapper">
+                  <div className="item_image_wrapper">
+                    <img
+                      src={likedArticle.imgUrl}
+                      alt=""
+                      className="product_image"
+                    />
 
-                  <img
-                    src="/assets/remove_icon.svg"
-                    alt=""
-                    className="product_image_icon"
-                  />
+                    <img
+                      src="/assets/remove_icon.svg"
+                      alt=""
+                      className="product_image_icon"
+                      onClick={() => {
+                        return dislike(likedArticle.id, email);
+                      }}
+                    />
+                  </div>
+
+                  <div className="item_description">
+                    <div className="item_name">{likedArticle.articleName}</div>
+                  </div>
                 </div>
 
-                <div className="item_description">
-                  <div className="item_name">{}</div>
+                <div className="item_price">{likedArticle.materials}</div>
+
+                <div className="item_quantity_wrapper">
+                  <div className="item_price">{likedArticle.crafting} days</div>
                 </div>
+
+                <div className="item_total_price">${likedArticle.price}</div>
               </div>
-
-              <div className="item_price">{}</div>
-
-              <div className="item_quantity_wrapper">
-                <div className="item_price">{} days</div>
+            ))}
+            {!likedArticles.length && (
+              <div className="noLiked">
+                <p>You didn't like any articles! :)</p>
               </div>
-
-              <div className="item_total_price">${}</div>
-            </div>
-
-            <div className="noLiked">
-              <p>You didn't like any articles! :)</p>
-            </div>
+            )}
           </div>
         </div>
       </div>
