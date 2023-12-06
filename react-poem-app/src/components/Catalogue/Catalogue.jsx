@@ -15,7 +15,6 @@ export default function Catalogue() {
         <h1 className="catalogue_header">Ecommerce Acceories & Fashion item</h1>
         <div className="search_bar_wrapper">
           <input className="search_bar_input" type="text" />
-
           <button className="search_bar_button" type="submit">
             <img src="assets/uil_search.svg" />
           </button>
