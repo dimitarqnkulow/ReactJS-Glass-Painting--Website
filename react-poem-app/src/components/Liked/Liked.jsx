@@ -1,4 +1,18 @@
+import { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import * as articleServices from "../../services/articlesServices";
+
 export default function Liked() {
+  const [likedArticles, setLikedArticles] = useState([]);
+  const { user } = useAuth();
+  const { email } = user;
+
+  useEffect(() => {
+    articleServices
+      .getLikedArticles(email)
+      .then((result) => setLikedArticles(result));
+  }, []);
+  console.log(likedArticles);
   return (
     <>
       <div className="details_page_header">

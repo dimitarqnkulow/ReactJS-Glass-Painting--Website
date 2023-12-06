@@ -7,6 +7,7 @@ export default function Details() {
   const { articleId } = useParams();
   const { user } = useAuth();
   const { email } = user;
+
   const [article, setArticle] = useState([]);
   const [likes, setLikes] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
@@ -28,11 +29,13 @@ export default function Details() {
     setIsLiked(true);
     await articleServices.likeArticle(articleId, email);
   };
+
   const dislike = async () => {
     setLikes((state) => state.filter((like) => like !== email));
     setIsLiked(false);
     await articleServices.dislikeArticle(articleId, email);
   };
+
   return (
     <div>
       <div className="details_page_header">
