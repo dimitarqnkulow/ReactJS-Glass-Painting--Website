@@ -2,6 +2,7 @@ import { useAuth } from "../../context/AuthContext";
 import useForm from "../../hooks/useForm";
 import { Link } from "react-router-dom";
 import Path from "../../utils/paths";
+import { useState } from "react";
 
 const REGISTER_FORM_KEYS = {
   Email: "email",
@@ -16,11 +17,12 @@ export default function Register() {
     [REGISTER_FORM_KEYS.Password]: "",
     [REGISTER_FORM_KEYS.RepeatPassword]: "",
   });
+
   return (
     <div className="register_page">
       <div className="register_wrapper">
         <div className="heading">Register</div>
-        {err && <div className="error_register">Error!</div>}
+        {err && <div className="error_register">{err}</div>}
         <form className="ng_form" onSubmit={onSubmit}>
           <input
             className="input_field"
@@ -32,8 +34,8 @@ export default function Register() {
             required
           />
 
-          {/* <div className="error_register">Email is required!</div>
-          <div className="error_register">Email is invalid!</div> */}
+          {/* {errors && <div className="error_register">{errors.email}</div>} */}
+          {/* <div className="error_register">Email is required!</div> */}
 
           <input
             className="input_field"

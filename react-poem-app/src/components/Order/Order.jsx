@@ -13,25 +13,27 @@ export default function Order() {
   });
 
   const [errors, setErrors] = useState({});
-
+  const [invalid, setInvalid] = useState("");
   const navigate = useNavigate();
   function handleValue(e) {
     e.preventDefault();
-
     const newObject = { ...values, [e.target.name]: e.target.value };
-
     setValues(newObject);
+    setErrors(OrderValidation(values));
   }
 
-  function orderSubmitHandler(e) {
+  async function orderSubmitHandler(e) {
     e.preventDefault();
+    if (errors) {
+      return setInvalid("Invalid order!");
+    }
     try {
       orderServices.createOrder(values);
       navigate(Path.Complete);
     } catch (err) {
-      console.log(err);
+      navigate(Path.Order);
+      return;
     }
-    setErrors(OrderValidation(values));
   }
 
   return (
@@ -40,6 +42,7 @@ export default function Order() {
         <h2 className="form_heading">
           Describe your emotions on glass and we will paint it for you!
         </h2>
+        {invalid && <div className="error_register">{invalid}</div>}
         <div className="name_wrapper">
           <input
             className="form_input"

@@ -5,10 +5,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../config/firebase-config";
 
-export const register = (email, password, repeatPassword) => {
-  if (password !== repeatPassword) {
-    return "Passwords doesn't match!";
-  }
+export const register = (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
 

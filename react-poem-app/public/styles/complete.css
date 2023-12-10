@@ -82,3 +82,7 @@ p {
   font-weight: 700;
   line-height: normal;
 }
+
+.link {
+  cursor: pointer;
+}

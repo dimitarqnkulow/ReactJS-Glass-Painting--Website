@@ -3,7 +3,7 @@ import Path from "./paths";
 import { useAuth } from "../context/AuthContext";
 const PrivateRoute = () => {
   const { user } = useAuth();
-  return user.accessToken ? <Outlet /> : <Navigate to={Path.Login} />;
+  return user ? <Outlet /> : <Navigate to={Path.Login} />;
 };
 
 export default PrivateRoute;

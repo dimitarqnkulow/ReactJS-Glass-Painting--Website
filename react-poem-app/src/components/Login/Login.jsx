@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import useForm from "../../hooks/useForm";
 import Path from "../../utils/paths";
@@ -8,18 +9,20 @@ export default function Login() {
     Email: "email",
     Password: "password",
   };
+
   const { loginSubmitHandler, err } = useAuth();
 
   const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
     email: "",
     password: "",
   });
+
   return (
     <div className="register_page">
       <div className="register_wrapper">
         <div className="heading">Login</div>
 
-        {err && <div className="error_register">Error!</div>}
+        {err && <div className="error_register">{err}</div>}
 
         <form className="ng_form" onSubmit={onSubmit}>
           <input
@@ -31,9 +34,6 @@ export default function Login() {
             value={values.email}
           />
 
-          {/* <div className="error_register">Email is required!</div>
-      <div className="error_register">Email is invalid!</div> */}
-
           <input
             className="input_field"
             type="password"
@@ -42,8 +42,6 @@ export default function Login() {
             onChange={onChange}
             value={values.password}
           />
-
-          {/* <div className="error_register">Password is required!</div> */}
 
           <button className="sign_in_button" type="submit">
             Log in

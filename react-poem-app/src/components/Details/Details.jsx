@@ -5,9 +5,8 @@ import * as articleServices from "../../services/articlesServices";
 
 export default function Details() {
   const { articleId } = useParams();
-  const { user } = useAuth();
-  const { email } = user;
-
+  const { user, isAuthenticated } = useAuth();
+  const email = user?.email;
   const [article, setArticle] = useState([]);
   const [likes, setLikes] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
@@ -85,10 +84,12 @@ export default function Details() {
               <p className="product_description">{article.crafting} days</p>
             </div>
 
-            <div className="buttons_wrapper">
-              {isLiked && <div className="like_icon" onClick={dislike}></div>}
-              {!isLiked && <div className="unlike_icon" onClick={like}></div>}
-            </div>
+            {isAuthenticated && (
+              <div className="buttons_wrapper">
+                {isLiked && <div className="like_icon" onClick={dislike}></div>}
+                {!isLiked && <div className="unlike_icon" onClick={like}></div>}
+              </div>
+            )}
           </div>
         </div>
       </div>

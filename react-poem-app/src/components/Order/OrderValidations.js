@@ -6,7 +6,6 @@ export default function OrderValidation(values) {
     `^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$`
   );
   const descriptionRegEx = new RegExp(`^.{15,300}$`);
-
   if (values.firstName === "") {
     errors.firstName = "Your name is required!";
   } else if (!nameRegEx.test(values.firstName)) {
