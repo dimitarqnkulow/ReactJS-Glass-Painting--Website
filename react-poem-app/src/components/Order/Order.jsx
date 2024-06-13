@@ -24,7 +24,7 @@ export default function Order() {
 
   async function orderSubmitHandler(e) {
     e.preventDefault();
-    if (errors) {
+    if (errors.length) {
       return setInvalid("Invalid order!");
     }
     try {
